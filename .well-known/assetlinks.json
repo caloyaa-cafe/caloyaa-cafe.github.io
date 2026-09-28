@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.caloyaa_cafe.twa",
+        "sha256_cert_fingerprints": ["3C:9C:8C:51:4D:FB:5D:DD:E5:77:EA:CA:5C:89:34:6C:50:14:E9:CC:6D:3A:6E:44:89:DE:0A:32:01:81:55:C2"]
+      }
+    }]
