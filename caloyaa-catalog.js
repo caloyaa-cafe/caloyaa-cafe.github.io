@@ -60,3 +60,89 @@
     if (location.hash === '#order') open();
   });
 })();
+
+// Private portal order intake. WhatsApp remains a separate backup path.
+(() => {
+  const checkout = document.getElementById('order');
+  const wa = document.getElementById('whatsapp');
+  if (!checkout || !wa) return;
+  const primary = document.createElement('button');
+  primary.type = 'button';
+  primary.id = 'portal-order';
+  primary.className = 'order-button';
+  primary.textContent = 'Send order request to Caloyaa';
+  primary.disabled = true;
+  primary.setAttribute('aria-describedby','portal-result');
+  wa.before(primary);
+  const note = document.createElement('p');
+  note.className = 'send-note';
+  note.textContent = 'Your order appears in Caloyaa’s private portal. Payment is checked by the cafe before acceptance.';
+  primary.after(note);
+  const result = document.createElement('div');
+  result.id = 'portal-result';
+  result.setAttribute('role','status');
+  note.after(result);
+  const labels = checkout.querySelector('.section-head p');
+  if (labels) labels.textContent = 'No login required. Send to our private order portal or use WhatsApp as a backup.';
+  const time = document.getElementById('preorder-time');
+  const timeLabel = document.getElementById('time-wrap');
+  if (timeLabel) timeLabel.firstChild.textContent = 'Preferred time (required)';
+  time.required = true;
+  const backup = document.createElement('p');
+  backup.className = 'send-note';
+  backup.textContent = 'Backup: WhatsApp opens a prefilled order. Tap Send there to place it by WhatsApp instead. Do not use both methods for the same order.';
+  wa.before(backup);
+  const sync = () => {
+    primary.disabled = wa.disabled || primary.dataset.sent === 'yes' || primary.dataset.sending === 'yes';
+    wa.textContent = wa.disabled ? 'Enter UTR for WhatsApp backup ↗' : 'Send via WhatsApp instead ↗';
+  };
+  const watch = new MutationObserver(sync);
+  watch.observe(wa,{attributes:true,attributeFilter:['disabled']});
+  document.getElementById('utr').addEventListener('input',sync);
+  document.addEventListener('click',() => queueMicrotask(sync));
+  sync();
+  primary.addEventListener('click',async () => {
+    if (primary.disabled) return;
+    if (!time.value.trim()) {
+      document.getElementById('error').textContent = 'Enter the time you want your order.';
+      document.getElementById('error').hidden = false;
+      time.focus();
+      return;
+    }
+    if (!check()) return;
+    if (!confirm('Send this order request to Caloyaa? Use the WhatsApp backup only if this request fails.')) return;
+    primary.dataset.sending = 'yes'; sync();
+    result.textContent = 'Sending order request...';
+    const payload = {
+      name:document.getElementById('customer-name').value.trim(),
+      phone:document.getElementById('phone').value.trim(),
+      desiredTime:time.value.trim(),
+      utr:document.getElementById('utr').value.trim(),
+      orderType:mode,
+      details:document.getElementById('detail').value.trim(),
+      notes:document.getElementById('notes').value.trim(),
+      outlet:activeOutlet.id,
+      items:amounts().entries.map(([name])=>({name,quantity:qty.get(name)}))
+    };
+    try {
+      const response = await fetch('https://caloyaa-orders.nikhilpratap099.workers.dev/api/orders',{
+        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)
+      });
+      const data = await response.json();
+      if (!response.ok || !data.statusUrl) throw Error(data.error || 'Order was not sent.');
+      const link = document.createElement('a');
+      link.href = data.statusUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'Track your order live';
+      result.replaceChildren(document.createTextNode('Order request received. Caloyaa must accept it after checking payment. '),link);
+      primary.dataset.sent = 'yes';
+      wa.disabled = true;
+      wa.textContent = 'Order sent in portal';
+      primary.textContent = 'Order request sent';
+      try { localStorage.setItem('caloyaa-last-status',data.statusUrl); } catch {}
+    } catch (error) {
+      result.textContent = error.message || 'Could not send order. Check your connection before trying again.';
+    } finally { delete primary.dataset.sending; sync(); }
+  });
+})();
