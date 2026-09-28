@@ -124,7 +124,6 @@
       document.getElementById('error').hidden = false;
       return;
     }
-    if (!confirm('Send this order request to Caloyaa? Use the WhatsApp backup only if this request fails.')) return;
     primary.dataset.sending = 'yes'; sync();
     result.textContent = 'Sending order request...';
     const payload = {
