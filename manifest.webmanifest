@@ -1,0 +1,24 @@
+{
+  "name": "Caloyaa Cafe - Order Online",
+  "short_name": "Caloyaa",
+  "description": "Browse the Caloyaa menu and send an order on WhatsApp.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff8ed",
+  "theme_color": "#d80f22",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
