@@ -100,8 +100,7 @@
   watch.observe(wa,{attributes:true,attributeFilter:['disabled']});
   document.getElementById('utr').addEventListener('input',sync);
   document.addEventListener('click',() => queueMicrotask(sync));
-  sync();
-  primary.hidden = true;
+  sync()
   sync();
   if (labels) labels.textContent = 'No login required. Check the prefilled WhatsApp order before you send it.';
   backup.hidden = true;
