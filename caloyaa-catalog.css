@@ -15,3 +15,10 @@
 @media(max-width:620px){.slider .slide .slide-content{top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;left:20px!important;width:calc(100% - 40px)!important}}
 /* Checkout is a separate step, not a visible form below the menu. */
 #order:not(.checkout-open){display:none!important}
+/* Portal checkout and separate WhatsApp fallback */
+#portal-order{display:block;width:100%;margin:12px 0 6px;background:#bd182b;color:#fff;border:0;border-radius:12px;padding:15px 20px;font:800 16px 'DM Sans',sans-serif;cursor:pointer}
+#portal-order:disabled{opacity:.5;cursor:not-allowed}
+#portal-result:not(:empty){margin:14px 0;padding:14px;border:1px solid #f2d6d8;background:#fff8f8;border-radius:10px;line-height:1.5}
+#portal-result a{font-weight:800;color:#af162a;text-decoration:underline}
+#whatsapp{display:block;width:100%;margin-top:8px;background:#fff!important;color:#235c3a!important;border:2px solid #238b48!important}
+#whatsapp:disabled{opacity:.5}
