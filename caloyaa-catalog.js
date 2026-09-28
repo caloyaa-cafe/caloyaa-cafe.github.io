@@ -46,3 +46,17 @@
   search.addEventListener('input',filter);
   document.querySelectorAll('.category-nav a,.category-tile').forEach(a=>a.addEventListener('click',()=>{if(search.value){search.value='';filter()}}));
 })();
+
+// Show personal and payment details only when a customer enters checkout.
+(() => {
+  const checkout = document.getElementById('order');
+  if (!checkout) return;
+  const open = () => { checkout.classList.add('checkout-open'); };
+  if (location.hash === '#order') open();
+  document.addEventListener('click', event => {
+    if (event.target.closest('#cart-checkout, a[href="#order"]')) open();
+  }, true);
+  window.addEventListener('hashchange', () => {
+    if (location.hash === '#order') open();
+  });
+})();
