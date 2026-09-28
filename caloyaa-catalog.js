@@ -101,6 +101,7 @@
   document.getElementById('utr').addEventListener('input',sync);
   document.addEventListener('click',() => queueMicrotask(sync));
   sync();
+  primary.hidden = true;
   primary.addEventListener('click',async () => {
     if (primary.disabled) return;
     if (!time.value.trim()) {
