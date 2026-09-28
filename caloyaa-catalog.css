@@ -22,3 +22,4 @@
 #portal-result a{font-weight:800;color:#af162a;text-decoration:underline}
 #whatsapp{display:block;width:100%;margin-top:8px;background:#fff!important;color:#235c3a!important;border:2px solid #238b48!important}
 #whatsapp:disabled{opacity:.5}
+#portal-order[hidden]{display:none!important}
