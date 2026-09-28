@@ -1,0 +1,56 @@
+name: Caloyaa food carousel refresh
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add four verified illustrations and carousel
+        env:
+          HERO_HTML_B64: PHNlY3Rpb24gY2xhc3M9InNsaWRlciIgaWQ9ImRlYWxzIiBhcmlhLWxhYmVsPSJGZWF0dXJlZCBmb29kIHByb21vdGlvbnMiIGFyaWEtcm9sZWRlc2NyaXB0aW9uPSJjYXJvdXNlbCI+PGFydGljbGUgY2xhc3M9InNsaWRlIGFjdGl2ZSIgYXJpYS1sYWJlbD0iMSBvZiA0Ij48aW1nIHNyYz0iL2hlcm8tMS5qcGciIGFsdD0iSWxsdXN0cmF0aXZlIHZlZ2dpZSBidXJnZXIsIGZyaWVzIGFuZCBjb2xhIj48ZGl2IGNsYXNzPSJzbGlkZS1jb250ZW50Ij48ZGl2IGNsYXNzPSJleWVicm93Ij5DQUxPWUFBIERFQUxTIMK3IEJVUkdFUiBDT01CTzwvZGl2PjxoMT5HT09EIEZPT0QuPGJyPkdSRUFUIERFQUwuPC9oMT48cCBjbGFzcz0iZGVhbC1wcmljZSI+4oK5OTkgPHNtYWxsPkJ1cmdlciArIHNtYWxsIGZyaWVzICsgQ29rZTwvc21hbGw+PC9wPjxhIGNsYXNzPSJwaWxsLWJ0biIgaHJlZj0iI21lbnUiPkV4cGxvcmUgdGhlIG1lbnUg4oaXPC9hPjwvZGl2PjwvYXJ0aWNsZT48YXJ0aWNsZSBjbGFzcz0ic2xpZGUiIGFyaWEtbGFiZWw9IjIgb2YgNCIgYXJpYS1oaWRkZW49InRydWUiPjxpbWcgc3JjPSIvaGVyby0yLmpwZyIgYWx0PSJJbGx1c3RyYXRpdmUgcGxhdGUgb2Ygc3RlYW1lZCBtb21vcyB3aXRoIGNoaWxpIGRpcCI+PGRpdiBjbGFzcz0ic2xpZGUtY29udGVudCI+PGRpdiBjbGFzcz0iZXllYnJvdyI+Q0FMT1lBQSBGQVZPVVJJVEVTIMK3IE1PTU9TPC9kaXY+PGgxPk1PTU9TPGJyPkhJVCBESUZGRVJFTlQuPC9oMT48cCBjbGFzcz0iZGVhbC1wcmljZSI+RnJvbSDigrk1MCA8c21hbGw+VmVnIG1vbW9zIMK3IOKCuTUwIHBvcnRpb248L3NtYWxsPjwvcD48YSBjbGFzcz0icGlsbC1idG4iIGhyZWY9IiNtZW51Ij5FeHBsb3JlIHRoZSBtZW51IOKGlzwvYT48L2Rpdj48L2FydGljbGU+PGFydGljbGUgY2xhc3M9InNsaWRlIiBhcmlhLWxhYmVsPSIzIG9mIDQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48aW1nIHNyYz0iaHR0cHM6Ly9jYWxveWFhLWNhZmUuZ2l0aHViLmlvL2hlcm8td3JhcC5qcGciIGFsdD0iSWxsdXN0cmF0aXZlIHBlcmkgcGVyaSBwYW5lZXIgd3JhcCBzZXJ2ZWQgd2l0aCBmcmVzaCB2ZWdldGFibGVzIj48ZGl2IGNsYXNzPSJzbGlkZS1jb250ZW50Ij48ZGl2IGNsYXNzPSJleWVicm93Ij5DQUxPWUFBIEZBVk9VUklURVMgwrcgV1JBUFM8L2Rpdj48aDE+V1JBUCBJVC48YnI+TE9WRSBJVC48L2gxPjxwIGNsYXNzPSJkZWFsLXByaWNlIj7igrkxMDAgPHNtYWxsPlBlcmkgUGVyaSBQYW5lZXIgV3JhcDwvc21hbGw+PC9wPjxhIGNsYXNzPSJwaWxsLWJ0biIgaHJlZj0iI2NhdGVnb3J5LTIiPkV4cGxvcmUgd3JhcHMg4oaXPC9hPjwvZGl2PjwvYXJ0aWNsZT48YXJ0aWNsZSBjbGFzcz0ic2xpZGUiIGFyaWEtbGFiZWw9IjQgb2YgNCIgYXJpYS1oaWRkZW49InRydWUiPjxpbWcgc3JjPSJodHRwczovL2NhbG95YWEtY2FmZS5naXRodWIuaW8vaGVyby1hbG9vLmpwZyIgYWx0PSJJbGx1c3RyYXRpdmUgdmVnZXRhcmlhbiBNYWdnaSBub29kbGVzIj48ZGl2IGNsYXNzPSJzbGlkZS1jb250ZW50Ij48ZGl2IGNsYXNzPSJleWVicm93Ij5DQUxPWUFBIEZBVk9VUklURVMgwrcgTUFHR0k8L2Rpdj48aDE+Q09NRk9SVCBJTjxicj5FVkVSWSBCSVRFLjwvaDE+PHAgY2xhc3M9ImRlYWwtcHJpY2UiPuKCuTUwIDxzbWFsbD5WZWcgTWFnZ2k8L3NtYWxsPjwvcD48YSBjbGFzcz0icGlsbC1idG4iIGhyZWY9IiNjYXRlZ29yeS0xIj5FeHBsb3JlIE1hZ2dpIOKGlzwvYT48L2Rpdj48L2FydGljbGU+PGRpdiBjbGFzcz0ic2xpZGUtY29udHJvbHMiIGFyaWEtbGFiZWw9IkNob29zZSBmZWF0dXJlZCBwcm9tb3Rpb24iPjxidXR0b24gY2xhc3M9ImFjdGl2ZSIgdHlwZT0iYnV0dG9uIiBhcmlhLWxhYmVsPSJTaG93IGJ1cmdlciBwcm9tb3Rpb24iIGFyaWEtY3VycmVudD0idHJ1ZSI+PC9idXR0b24+PGJ1dHRvbiB0eXBlPSJidXR0b24iIGFyaWEtbGFiZWw9IlNob3cgbW9tb3MgcHJvbW90aW9uIj48L2J1dHRvbj48YnV0dG9uIHR5cGU9ImJ1dHRvbiIgYXJpYS1sYWJlbD0iU2hvdyBwYW5lZXIgd3JhcCI+PC9idXR0b24+PGJ1dHRvbiB0eXBlPSJidXR0b24iIGFyaWEtbGFiZWw9IlNob3cgYWxvbyB3cmFwIj48L2J1dHRvbj48L2Rpdj48ZGl2IGNsYXNzPSJzbGlkZS1hcnJvd3MiPjxidXR0b24gdHlwZT0iYnV0dG9uIiBpZD0icHJldiIgYXJpYS1sYWJlbD0iUHJldmlvdXMgcHJvbW90aW9uIj7igLk8L2J1dHRvbj48YnV0dG9uIHR5cGU9ImJ1dHRvbiIgaWQ9Im5leHQiIGFyaWEtbGFiZWw9Ik5leHQgcHJvbW90aW9uIj7igLo8L2J1dHRvbj48L2Rpdj48L3NlY3Rpb24+
+          HERO_STYLE_B64: PHN0eWxlIGlkPSJjYWxveWFhLXZpc3VhbC11cGdyYWRlIj4uc2xpZGVye2JveC1zaGFkb3c6MCAyNHB4IDYycHggIzNlMTAwZDMzfS5zbGlkZTpiZWZvcmV7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoOTBkZWcscmdiYSg1NiwwLDcsLjkxKSAwJSxyZ2JhKDY3LDAsOSwuNjgpIDM0JSxyZ2JhKDY0LDAsOCwuMDQpIDc4JSl9LnNsaWRlIGltZ3tmaWx0ZXI6c2F0dXJhdGUoMS4wOCkgY29udHJhc3QoMS4wNCl9LnNsaWRlLWNvbnRlbnR7ZmlsdGVyOmRyb3Atc2hhZG93KDAgM3B4IDE0cHggIzJiMDAwODljKX0uc2xpZGUgLmV5ZWJyb3d7ZGlzcGxheTppbmxpbmUtYmxvY2s7YmFja2dyb3VuZDojZmZmZmZmMjQ7Ym9yZGVyOjFweCBzb2xpZCAjZmZmZmZmODA7Ym9yZGVyLXJhZGl1czozMHB4O3BhZGRpbmc6OHB4IDEzcHg7YmFja2Ryb3AtZmlsdGVyOmJsdXIoNXB4KX0uc2xpZGUgLnBpbGwtYnRue2JveC1zaGFkb3c6MCA4cHggMjRweCAjMWQwMDA3NDd9LmNhdGVnb3J5LXRpbGV7dHJhbnNpdGlvbjp0cmFuc2Zvcm0gLjI1cyBlYXNlLGJveC1zaGFkb3cgLjI1cyBlYXNlfS5jYXRlZ29yeS10aWxlOmhvdmVye3RyYW5zZm9ybTp0cmFuc2xhdGVZKC01cHgpO2JveC1zaGFkb3c6MCAxNnB4IDMwcHggIzZkMTIwZDIxfS5tZW51LWl0ZW17dHJhbnNpdGlvbjp0cmFuc2Zvcm0gLjJzIGVhc2UsYm94LXNoYWRvdyAuMnMgZWFzZX0ubWVudS1pdGVtOmhvdmVye3RyYW5zZm9ybTp0cmFuc2xhdGVZKC0ycHgpO2JveC1zaGFkb3c6MCA5cHggMjBweCAjNTQxYTBhMTZ9QG1lZGlhKG1heC13aWR0aDo2MjBweCl7LnNsaWRlOmJlZm9yZXtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgwZGVnLHJnYmEoNDUsMCw1LC45NSkgMCUscmdiYSg1MiwwLDYsLjY0KSA0OCUscmdiYSg1MiwwLDYsLjA0KSA5MSUpfS5zbGlkZSBpbWd7b2JqZWN0LXBvc2l0aW9uOmNlbnRlciA0MCV9LnNsaWRlLWNvbnRlbnR7ZmlsdGVyOmRyb3Atc2hhZG93KDAgMnB4IDdweCAjMjMwMDA1YWEpfS5zbGlkZXJ7Ym94LXNoYWRvdzpub25lfS5zbGlkZSAuZXllYnJvd3tmb250LXNpemU6MTBweDtwYWRkaW5nOjZweCA5cHh9fTwvc3R5bGU+
+        run: |
+          python3 - <<'PYCODE'
+          import base64, re, urllib.request
+          from pathlib import Path
+          html = Path('index.html').read_text()
+          start = html.index('<section class="slider"')
+          end = html.index('</section>', start) + len('</section>')
+          old_hero = html[start:end]
+          old_images = re.findall(r'src="data:image/jpeg;base64,([^"]+)', old_hero)
+          if len(old_images) != 2:
+              raise RuntimeError('Expected two existing hero images; aborting safe patch')
+          for i, data in enumerate(old_images, 1):
+              Path(f'hero-{i}.jpg').write_bytes(base64.b64decode(data))
+          # Additional paneer wrap and Veg Maggi images are licensed under CC BY-SA 4.0 by Shafana jasmine and Gannu03 respectively.
+          # The additions load from Commons, rather than using the owner's own menu as if it were a product photo.
+          for i, url in {
+              3: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Paneer_kathi_roll_homemade.jpg/1280px-Paneer_kathi_roll_homemade.jpg',
+              4: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Veg_Maggi_2.jpg/1280px-Veg_Maggi_2.jpg',
+          }.items():
+              request = urllib.request.Request(url, headers={'User-Agent': 'CaloyaaCafeSite/1.0'})
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  data = response.read()
+              if not data.startswith(bytes.fromhex('ffd8ff')):
+                  raise RuntimeError(f'Not a JPEG: hero-{i}')
+              Path(f'hero-{i}.jpg').write_bytes(data)
+          new_hero = base64.b64decode(__import__('os').environ['HERO_HTML_B64']).decode()
+          new_style = base64.b64decode(__import__('os').environ['HERO_STYLE_B64']).decode()
+          html = html[:start] + new_hero + html[end:]
+          if 'id="caloyaa-visual-upgrade"' not in html:
+              html = html.replace('</head>', new_style + '</head>', 1)
+          credit = '<small class="photo-credits" style="display:block;text-align:center;padding:8px;background:#291d1b;color:#f6e1d2;font-size:10px">Illustrative photos: paneer wrap by Shafana jasmine and Veg Maggi by Gannu03, CC BY-SA 4.0 · Wikimedia Commons.</small>'
+          if 'class="photo-credits"' not in html:
+              html = html.replace('</body>', credit + '</body>', 1)
+          Path('index.html').write_text(html)
+          PYCODE
+      - name: Commit carousel
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html hero-1.jpg hero-2.jpg hero-3.jpg hero-4.jpg
+          git diff --cached --quiet || git commit -m 'Add four-slide Caloyaa food carousel'
+          git push
