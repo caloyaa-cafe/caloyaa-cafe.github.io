@@ -1,0 +1,31 @@
+name: Fix Caloyaa carousel image paths
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix photo paths and accurate Maggi label
+        run: |
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          p=Path('index.html');s=p.read_text()
+          assert s.count('https://caloyaa-cafe.github.io/hero-wrap.jpg')==1
+          assert s.count('https://caloyaa-cafe.github.io/hero-aloo.jpg')==1
+          s=s.replace('https://caloyaa-cafe.github.io/hero-wrap.jpg','/hero-3.jpg')
+          s=s.replace('https://caloyaa-cafe.github.io/hero-aloo.jpg','/hero-4.jpg')
+          s=s.replace('Illustrative aloo wrap served with fresh vegetables','Illustrative vegetarian Maggi noodles')
+          s=s.replace('CALOYAA FAVOURITES · WRAPS</div><h1>COMFORT IN<br>EVERY BITE.</h1><p class="deal-price">₹70 <small>Aloo Wrap</small></p><a class="pill-btn" href="#category-2">Explore wraps ↗','CALOYAA FAVOURITES · MAGGI</div><h1>COMFORT IN<br>EVERY BITE.</h1><p class="deal-price">₹50 <small>Veg Maggi</small></p><a class="pill-btn" href="#category-1">Explore Maggi ↗')
+          s=s.replace('aria-label="Show aloo wrap"','aria-label="Show Veg Maggi"')
+          p.write_text(s)
+          PYCODE
+      - name: Commit image fixes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'Fix Caloyaa carousel images and label'
+          git push
