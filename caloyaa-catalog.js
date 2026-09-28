@@ -15,8 +15,8 @@
   // Existing Caloyaa photography where it fits; category art otherwise. Illustrative, not a photo of the exact item.
   const foodImage=(name,category)=>{
     if(/momo/i.test(name))return '/hero-2.jpg';
-    if(/wrap/i.test(name))return '/hero-4.jpg';
-    if(/maggi/i.test(name))return '/hero-3.jpg';
+    if(/wrap/i.test(name))return '/hero-3.jpg';
+    if(/maggi/i.test(name))return '/hero-4.jpg';
     if(/burger/i.test(name))return '/hero-1.jpg';
     if(/sandwich/i.test(name))return art('🥪','#f4c990');
     if(/pasta/i.test(name))return art('🍝','#f8cd9e');
