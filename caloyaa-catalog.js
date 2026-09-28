@@ -94,7 +94,7 @@
   wa.before(backup);
   const sync = () => {
     primary.disabled = wa.disabled || primary.dataset.sent === 'yes' || primary.dataset.sending === 'yes';
-    wa.textContent = primary.dataset.sent === 'yes' ? 'Order sent in portal' : wa.disabled ? 'Enter UTR for WhatsApp backup ↗' : 'Send via WhatsApp instead ↗';
+    wa.textContent = primary.hidden ? (wa.disabled ? 'Enter UTR to continue to WhatsApp ↗' : 'Continue to WhatsApp ↗') : primary.dataset.sent === 'yes' ? 'Order sent in portal' : wa.disabled ? 'Enter UTR for WhatsApp backup ↗' : 'Send via WhatsApp instead ↗';
   };
   const watch = new MutationObserver(sync);
   watch.observe(wa,{attributes:true,attributeFilter:['disabled']});
@@ -102,6 +102,10 @@
   document.addEventListener('click',() => queueMicrotask(sync));
   sync();
   primary.hidden = true;
+  sync();
+  if (labels) labels.textContent = 'No login required. Check the prefilled WhatsApp order before you send it.';
+  backup.hidden = true;
+  note.hidden = true;
   primary.addEventListener('click',async () => {
     if (primary.disabled) return;
     if (!time.value.trim()) {
