@@ -21,15 +21,17 @@
     button.id = 'caloyaa-install';
     button.textContent = 'Install app';
     button.setAttribute('aria-label', 'Install Caloyaa app');
-    button.style.cssText = 'margin-left:auto;background:#e2162b;color:#fff;border:0;border-radius:20px;padding:9px 13px;font:700 12px sans-serif;cursor:pointer;white-space:nowrap';
+    button.style.cssText = (window.matchMedia('(max-width: 620px)').matches ? 'padding:7px 8px;font:700 11px sans-serif;' : 'padding:9px 13px;font:700 12px sans-serif;') + 'margin-left:auto;background:#e2162b;color:#fff;border:0;border-radius:20px;cursor:pointer;white-space:nowrap';
     nav.append(button);
     {
       const download = document.createElement('a');
       download.id = 'caloyaa-apk-download';
       download.href = 'https://github.com/caloyaa-cafe/caloyaa-cafe.github.io/releases/download/v1.0.0-android/Caloyaa.apk';
-      download.textContent = 'Download Android APK';
+      const compact = window.matchMedia('(max-width: 620px)').matches;
+      download.textContent = compact ? 'Get APK' : 'Download Android APK';
+      download.title = 'Android APK download';
       download.setAttribute('aria-label', 'Download Caloyaa Android app APK');
-      download.style.cssText = 'margin-left:8px;background:#fff;color:#a30d20;border:1px solid #e2162b;border-radius:20px;padding:8px 12px;font:700 12px sans-serif;text-decoration:none;white-space:nowrap';
+      download.style.cssText = (compact ? 'margin-left:0;padding:7px 8px;font:700 11px sans-serif;' : 'margin-left:8px;padding:8px 12px;font:700 12px sans-serif;') + 'background:#fff;color:#a30d20;border:1px solid #e2162b;border-radius:20px;text-decoration:none;white-space:nowrap';
       nav.append(download);
     }
     button.addEventListener('click', async () => {
