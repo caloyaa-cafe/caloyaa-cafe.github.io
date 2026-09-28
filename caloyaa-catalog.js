@@ -94,7 +94,7 @@
   wa.before(backup);
   const sync = () => {
     primary.disabled = wa.disabled || primary.dataset.sent === 'yes' || primary.dataset.sending === 'yes';
-    wa.textContent = wa.disabled ? 'Enter UTR for WhatsApp backup ↗' : 'Send via WhatsApp instead ↗';
+    wa.textContent = primary.dataset.sent === 'yes' ? 'Order sent in portal' : wa.disabled ? 'Enter UTR for WhatsApp backup ↗' : 'Send via WhatsApp instead ↗';
   };
   const watch = new MutationObserver(sync);
   watch.observe(wa,{attributes:true,attributeFilter:['disabled']});
@@ -109,20 +109,34 @@
       time.focus();
       return;
     }
-    if (!check()) return;
+    const modeButton = document.querySelector('[data-mode].chosen');
+    const orderType = modeButton?.dataset.mode || 'Pickup';
+    const name = document.getElementById('customer-name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const utr = document.getElementById('utr').value.trim();
+    const details = document.getElementById('detail').value.trim();
+    const items = [...document.querySelectorAll('.menu-item')].map(card => ({
+      name:card.querySelector('.item-info strong')?.textContent.trim(),
+      quantity:Number(card.querySelector('output')?.textContent)
+    })).filter(item => item.name && item.quantity > 0);
+    if (!items.length || !name || !/^[+\d\s()-]{7,18}$/.test(phone) || !/^\d{8,30}$/.test(utr) || (orderType !== 'Pickup' && !details)) {
+      document.getElementById('error').textContent = 'Check your basket, name, phone, order details and UTR.';
+      document.getElementById('error').hidden = false;
+      return;
+    }
     if (!confirm('Send this order request to Caloyaa? Use the WhatsApp backup only if this request fails.')) return;
     primary.dataset.sending = 'yes'; sync();
     result.textContent = 'Sending order request...';
     const payload = {
-      name:document.getElementById('customer-name').value.trim(),
-      phone:document.getElementById('phone').value.trim(),
+      name,
+      phone,
       desiredTime:time.value.trim(),
-      utr:document.getElementById('utr').value.trim(),
-      orderType:mode,
-      details:document.getElementById('detail').value.trim(),
+      utr,
+      orderType,
+      details,
       notes:document.getElementById('notes').value.trim(),
-      outlet:activeOutlet.id,
-      items:amounts().entries.map(([name])=>({name,quantity:qty.get(name)}))
+      outlet:document.getElementById('outlet-select')?.value,
+      items
     };
     try {
       const response = await fetch('https://caloyaa-orders.nikhilpratap099.workers.dev/api/orders',{
