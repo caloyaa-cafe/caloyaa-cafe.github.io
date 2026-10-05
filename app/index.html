@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Caloyaa</title>
+<meta name="theme-color" content="#fff8f1"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="/icon-192.png">
+<style>
+:root{--bg:#fff8f1;--card:#ffffff;--ink:#2a1a14;--sub:#7d6d63;--gold:#d62f2f;--red:#d62f2f}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:520px;margin:0 auto;min-height:100vh;padding-bottom:150px}
+header{padding:calc(env(safe-area-inset-top) + 18px) 18px 8px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:800;color:var(--gold);letter-spacing:-1px}.loc{font-size:12px;color:var(--sub)}
+.search{margin:8px 18px;display:block}.search input{box-shadow:0 1px 6px #3a1f1414;width:100%;padding:13px 16px;border-radius:14px;border:0;background:var(--card);color:var(--ink);font-size:15px}
+.hero{margin:8px 18px;border-radius:20px;padding:18px;background:linear-gradient(120deg,#8c1d1d,#d23a2a);color:#fff}.hero b{font-size:21px;display:block}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 18px;scrollbar-width:none}.chip{box-shadow:0 1px 4px #3a1f1414;flex:none;padding:8px 15px;border-radius:20px;background:var(--card);border:0;color:var(--ink);font-size:13px}.chip.on{background:var(--gold);color:#ffffff;font-weight:700}
+h2{padding:10px 18px 4px;font-size:17px}
+.grid{padding:6px 18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--card);box-shadow:0 1px 6px #3a1f1414;border-radius:18px;overflow:hidden;display:flex;flex-direction:column}.card.out{opacity:.45}
+.img{height:92px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:#ffffffb0}
+.ct{padding:10px;display:flex;flex-direction:column;flex:1}.ct b{font-size:13px;margin-top:5px;line-height:1.25}
+.veg{width:12px;height:12px;border:2px solid #1a9d4a;border-radius:2px;position:relative;display:inline-block}.veg:after{content:"";position:absolute;inset:2px;background:#1a9d4a;border-radius:50%}
+.pr{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px;font-weight:700}
+button{font:inherit}.add{border:1px solid var(--gold);background:var(--gold);color:#ffffff;padding:5px 15px;border-radius:9px;font-weight:700;font-size:12px}
+.q{display:flex;align-items:center;gap:9px;border:1px solid var(--gold);border-radius:9px;padding:2px 6px;color:var(--gold)}.q button{background:none;border:0;color:var(--gold);font-size:17px;padding:2px 5px}
+.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;width:calc(100% - 32px);max-width:488px;background:var(--gold);color:#ffffff;padding:14px 18px;border-radius:16px;display:flex;justify-content:space-between;font-weight:700;border:0}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;height:70px;padding-bottom:env(safe-area-inset-bottom);background:#ffffff;border-top:1px solid #eadfd5;display:flex;justify-content:space-around;align-items:center}
+nav button{background:none;border:0;color:var(--sub);font-size:12px}nav .on{color:var(--gold);font-weight:700}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 18px}.row small{color:var(--sub)}
+.box{box-shadow:0 1px 6px #3a1f1414;margin:10px 18px;padding:14px;border-radius:16px;background:var(--card);font-size:14px}.box div{display:flex;justify-content:space-between;margin:4px 0}
+.pay{margin:10px 18px;padding:14px;border-radius:16px;border:1px dashed var(--gold);font-size:13px;line-height:1.5}
+.pay input,.pf input{width:100%;margin-top:8px;padding:12px;border-radius:10px;border:1px solid #eadfd5;background:var(--card);color:var(--ink);font-size:16px}
+.btn{display:block;margin:10px 18px;width:calc(100% - 36px);padding:14px;border-radius:14px;border:0;background:var(--gold);color:#ffffff;font-weight:800;font-size:15px}.btn:disabled{opacity:.4}.btn.alt{background:var(--card);color:var(--ink)}
+.pf{margin:10px 18px;padding:14px;border-radius:16px;background:var(--card);box-shadow:0 1px 6px #3a1f1414;font-size:14px}.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0}.stamp{aspect-ratio:1;border-radius:50%;border:2px dashed #d9c9bb;display:flex;align-items:center;justify-content:center;font-weight:800;color:#d9c9bb}.stamp.on{background:var(--gold);border:2px solid var(--gold);color:#fff}.note{margin:6px 18px;color:var(--sub);font-size:12px;line-height:1.4}.empty{padding:40px 18px;text-align:center;color:var(--sub)}
+#stockmsg{margin:8px 18px;padding:10px;border-radius:10px;background:#fde7e4;font-size:13px}[hidden]{display:none!important}
+</style></head><body>
+<header><div><div class="logo">Caloyaa</div><div class="loc">Aakash Institute, Plot 59, Dwarka Sector 12</div></div></header>
+<div id="stockmsg" hidden>Live stock unavailable. Ordering is paused, try again shortly.</div>
+<main id="view"></main>
+<div class="bar" id="bar" hidden><span id="barn"></span><span id="bart"></span></div>
+<nav><button data-t="menu" class="on">Menu</button><button data-t="offers">Offers</button><button data-t="cart">Cart</button><button data-t="orders">Orders</button><button data-t="me">Account</button></nav>
+<script>
+const menu=[{name:'Burgers & sandwiches',img:'/hero-1.jpg',items:[['Aloo Tikki Burger',55],['Aloo Tikki Burger with Cheese',65],['Paneer Corn Sandwich',70],['Paneer Capsicum Sandwich',80],['Cheese Grill Sandwich',60]]},{name:'Comfort food',img:'/hero-4.jpg',items:[['Masala Maggi',40],['Veg Maggi',50],['Cheese Maggi',60],['Peri Peri Maggi',60],['Pasta',60],['Garlic Pasta',90],['Cheese Garlic Bread',90],['Salted Fries',50],['Peri Peri Fries',60],['Veg Momos (₹50 portion)',50],['Veg Momos (₹90 portion)',90],['Paneer Momos (₹60 portion)',60],['Paneer Momos (₹100 portion)',100]]},{name:'Wraps',img:'/hero-3.jpg',items:[['Aloo Wrap',70],['Peri Peri Paneer Wrap',100]]},{name:'Something sweet',items:[['Brownie with Choco Syrup',40],['Chocolate Ice Cream',45],['Strawberry Ice Cream',45],['Butterscotch Ice Cream',45]]},{name:'Snacks & chocolates',items:[["Lay's Chips (Rs 15 pack)",15],["Lay's Chips (Rs 20 pack)",20],['Kit Kat',10],['Dairy Milk',10],['5 Star',10]]},{name:'Drinks',items:[...['Mojito','Blueberry','Green Apple','Bubble Gum','Watermelon','Kala Khatta','Cranberry'].map(n=>[n+' Mocktail',70]),['Coke',20],['Red Bull',125],['Monster',125],['Hot Coffee',30],['Cold Coffee',70],...['Strawberry','Butterscotch','Chocolate','Banana','Oreo'].map(n=>[n+' Shake',70])]},{name:'Combos',items:[['Sandwich + Small Fries + Coke',99],['Burger + Small Fries + Coke',99],['Small Garlic Bread + Mocktail',99]]}];
+const PAYEE='paytm.s25j3ot@pty',PN='Express Cafe 119',WA='919758939698';
+const price=new Map(),cat=new Map();menu.forEach(g=>g.items.forEach(([n,p])=>{price.set(n,p);cat.set(n,g)}));
+const tint={'Burgers & sandwiches':'#b8601a','Comfort food':'#8a3b12','Wraps':'#7a4a1a','Something sweet':'#5a3a30','Snacks & chocolates':'#4a3a60','Drinks':'#6b2f48','Combos':'#8c1d1d'};
+const prof=()=>JSON.parse(localStorage.getItem('cal_profile')||'{}'),stampN=()=>+localStorage.getItem('cal_stamps')||0;
+const qty=new Map(JSON.parse(localStorage.getItem('cal_cart')||'[]'));let tab='menu',filter='All',query='',stock=null;
+const $=s=>document.querySelector(s),money=n=>'₹'+n;
+const save=()=>localStorage.setItem('cal_cart',JSON.stringify([...qty]));
+const lines=()=>[...qty].filter(([n,q])=>q>0&&price.has(n));
+const total=()=>lines().reduce((s,[n,q])=>s+price.get(n)*q,0),count=()=>lines().reduce((s,[,q])=>s+q,0);
+async function loadStock(){try{const r=await fetch('https://caloyaa-cafe.github.io/stock.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;const d=await r.json();if(d.version!==1||!d.items)throw 0;stock=d.items;$('#stockmsg').hidden=true}catch{stock=null;$('#stockmsg').hidden=false}render()}
+const avail=n=>stock&&stock[n]!==false;
+function card(n){const g=cat.get(n),p=price.get(n),q=qty.get(n)||0,ok=avail(n);
+ return `<div class="card ${ok?'':'out'}"><div class="img" style="background-image:${g.img?`linear-gradient(#0003,#0003),url(${g.img})`:`linear-gradient(135deg,${tint[g.name]},#1b1014)`}">${g.img?'':n[0]}</div><div class="ct"><span class="veg"></span><b>${n}</b><div class="pr"><span>${money(p)}</span>${!ok?'<small>Sold out</small>':q?`<span class="q"><button data-m="${n}">−</button>${q}<button data-p="${n}">+</button></span>`:`<button class="add" data-p="${n}">ADD</button>`}</div></div></div>`}
+function menuView(){const names=['All',...menu.map(g=>g.name)];
+ let h=`<label class="search"><input id="s" type="search" placeholder="Search burgers, momos, shakes..." value="${query}"></label><div class="hero"><b>Combos at ₹99</b>Sandwich or burger + fries + Coke</div><div class="chips">${names.map(c=>`<button class="chip ${c===filter?'on':''}" data-f="${c}">${c}</button>`).join('')}</div>`;
+ menu.filter(g=>filter==='All'||g.name===filter).forEach(g=>{const it=g.items.filter(([n])=>n.toLowerCase().includes(query.toLowerCase()));if(it.length)h+=`<h2>${g.name}</h2><div class="grid">${it.map(([n])=>card(n)).join('')}</div>`});return h}
+function offersView(){const n=stampN()%10,full=Math.floor(stampN()/10);return `<h2>Loyalty stamps</h2><div class="pf">One stamp for every order you place in this app. ${full?full+' card(s) completed. ':''}<div class="stamps">${Array.from({length:10},(_,i)=>`<div class="stamp ${i<n?'on':''}">${i+1}</div>`).join('')}</div><small style="color:var(--sub)">Stamps are saved on this phone. Ask at the counter about rewards.</small></div><h2>Offers</h2><div class="grid">${menu[6].items.map(([n])=>card(n)).join('')}</div><p class="note">More offers are coming soon.</p>`}
+function payUri(){return 'upi://pay?'+new URLSearchParams({pa:PAYEE,pn:PN,tn:'Caloyaa order',am:total().toFixed(2),cu:'INR'})}
+function cartView(){const L=lines();if(!L.length)return '<div class="empty">Your cart is empty.<br>Add something from the menu.</div>';
+ return `<h2>Your cart</h2>${L.map(([n,q])=>`<div class="row"><div><b>${n}</b><br><small>${money(price.get(n))}</small></div><span class="q"><button data-m="${n}">−</button>${q}<button data-p="${n}">+</button></span></div>`).join('')}
+ <div class="box"><div><span>Item total</span><span>${money(total())}</span></div><div><b>To pay</b><b>${money(total())}</b></div></div>
+ <div class="pf"><b>Your details</b><input id="cn" placeholder="Name" value="${prof().name||''}"><input id="cp" inputmode="numeric" maxlength="10" placeholder="10 digit phone number" value="${prof().phone||''}"></div>
+ <div class="pay"><b>Pay by UPI</b><br>Pay ${money(total())} to ${PN}, then enter the transaction ID (UTR) from your payment app.<a href="${payUri()}" class="btn alt" style="text-decoration:none;text-align:center;margin:10px 0;width:100%">Open UPI app</a><input id="utr" inputmode="numeric" maxlength="30" placeholder="UTR (8 to 30 digits)"></div>
+ <button class="btn" id="send" disabled>Enter UTR to place order</button><p class="note">Your order opens in WhatsApp for you to send. Caloyaa checks the UTR against the payment before preparing it.</p>`}
+function meView(){const p=prof();return `<h2>Your details</h2><div class="pf">Saved on this phone and filled in for every order.<input id="pn" placeholder="Name" value="${p.name||''}"><input id="pp" inputmode="numeric" maxlength="10" placeholder="10 digit phone number" value="${p.phone||''}"></div><button class="btn" id="psave">Save details</button><p class="note" id="pmsg"></p>`}
+function ordersView(){const o=JSON.parse(localStorage.getItem('cal_last')||'null');if(!o)return '<div class="empty">No orders yet.</div>';return `<h2>Last order</h2><div class="box">${o.lines.map(l=>`<div><span>${l}</span></div>`).join('')}<div><b>Total</b><b>${money(o.total)}</b></div><div><small>${o.when}</small><small>UTR ${o.utr}</small></div></div>`}
+function render(){const v=$('#view');const keepS=document.activeElement&&document.activeElement.id;
+ v.innerHTML=tab==='menu'?menuView():tab==='offers'?offersView():tab==='cart'?cartView():tab==='me'?meView():ordersView();
+ const c=count();$('#bar').hidden=!c||tab==='cart';$('#barn').textContent=c+(c>1?' items':' item');$('#bart').textContent='View cart '+money(total());
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));
+ const s=$('#s');if(s&&keepS==='s'){s.focus();s.setSelectionRange(s.value.length,s.value.length)}
+ const u=$('#utr');if(u){const chk=()=>{const okU=/^\d{8,30}$/.test(u.value.trim()),okN=$('#cn').value.trim().length>=2,okP=/^\d{10}$/.test($('#cp').value.trim());$('#send').disabled=!(okU&&okN&&okP);$('#send').textContent=!okN||!okP?'Enter name and 10 digit phone':!okU?'Enter UTR to place order':'Place order on WhatsApp'};['#utr','#cn','#cp'].forEach(i=>$(i).oninput=chk);chk()}
+ const ps=$('#psave');if(ps)ps.onclick=()=>{const n=$('#pn').value.trim(),p=$('#pp').value.trim();if(n.length<2||!/^\d{10}$/.test(p)){$('#pmsg').textContent='Enter your name and a 10 digit phone number.';return}localStorage.setItem('cal_profile',JSON.stringify({name:n,phone:p}));$('#pmsg').textContent='Saved.'}}
+document.addEventListener('click',async e=>{const t=e.target.closest('[data-p],[data-m],[data-f],[data-t],#bar,#send');if(!t)return;
+ if(t.dataset.p){if(!avail(t.dataset.p))return;qty.set(t.dataset.p,(qty.get(t.dataset.p)||0)+1);save();render()}
+ else if(t.dataset.m){qty.set(t.dataset.m,Math.max(0,(qty.get(t.dataset.m)||0)-1));save();render()}
+ else if(t.dataset.f){filter=t.dataset.f;render()}
+ else if(t.dataset.t){tab=t.dataset.t;render();scrollTo(0,0)}
+ else if(t.id==='bar'){tab='cart';render()}
+ else if(t.id==='send'){await loadStock();const bad=lines().filter(([n])=>!avail(n));if(bad.length){alert('Sold out now: '+bad.map(b=>b[0]).join(', ')+'. Remove it and try again.');tab='cart';render();return}
+  const utr=$('#utr').value.trim(),cname=$('#cn').value.trim(),cph=$('#cp').value.trim();localStorage.setItem('cal_profile',JSON.stringify({name:cname,phone:cph}));localStorage.setItem('cal_stamps',stampN()+1);const L=lines().map(([n,q])=>`${q} x ${n} - ${money(price.get(n)*q)}`);
+  const text=['New Caloyaa order (app)','Name: '+cname,'Phone: '+cph,...L,'Total: '+money(total()),`UPI payee: ${PN} (${PAYEE})`,'Customer-reported UTR: '+utr,'Payment reported by customer; Caloyaa to verify.'].join('\n');
+  localStorage.setItem('cal_last',JSON.stringify({lines:L,total:total(),utr,when:new Date().toLocaleString()}));qty.clear();save();location.href='https://wa.me/'+WA+'?text='+encodeURIComponent(text)}});
+document.addEventListener('input',e=>{if(e.target.id==='s'){query=e.target.value;render()}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadStock()});
+render();loadStock();
+</script></body></html>
