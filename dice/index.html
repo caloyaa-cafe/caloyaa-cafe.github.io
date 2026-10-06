@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Caloyaa Dice Play - Roll &amp; Save</title>
+<meta name="theme-color" content="#d80f22">
+<style>
+:root{--red:#d80f22;--dark:#8f0916;--cream:#fff8ed;--gold:#ffb703;--ink:#2b1a14}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+.hero{background:linear-gradient(160deg,var(--red),var(--dark));color:#fff;padding:28px 20px 70px;text-align:center;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.07)}
+.hero:before{width:220px;height:220px;top:-80px;left:-60px}.hero:after{width:160px;height:160px;bottom:-60px;right:-30px}
+.brand{font-weight:800;letter-spacing:.14em;font-size:14px;opacity:.9}
+h1{margin:8px 0 4px;font-size:30px;line-height:1.1}
+.sub{opacity:.92;font-size:15px}
+.wrap{max-width:440px;margin:-48px auto 40px;padding:0 16px;position:relative}
+.card{background:#fff;border-radius:22px;padding:22px 18px;box-shadow:0 12px 34px rgba(143,9,22,.18)}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px;color:#6b4a3f}
+input{width:100%;padding:14px;border:2px solid #f0dfcc;border-radius:12px;font-size:16px;background:#fffdf9;outline:none}
+input:focus{border-color:var(--red)}
+.btn{width:100%;margin-top:18px;padding:16px;border:0;border-radius:14px;background:linear-gradient(180deg,#ef2236,var(--red));color:#fff;font-size:18px;font-weight:800;box-shadow:0 6px 0 var(--dark);cursor:pointer}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--dark)}.btn:disabled{opacity:.6}
+.err{color:#b00020;font-size:14px;margin-top:10px;min-height:18px;text-align:center}
+.rules{font-size:12.5px;color:#7a5f54;text-align:center;margin-top:12px;line-height:1.5}
+.stage{display:none;text-align:center}
+.scene{perspective:700px;height:140px;display:flex;align-items:center;justify-content:center;margin:6px 0 14px}
+.dice{width:96px;height:96px;position:relative;transform-style:preserve-3d;transition:transform 2.2s cubic-bezier(.15,.7,.2,1)}
+.face{position:absolute;width:96px;height:96px;background:#fff;border:3px solid var(--red);border-radius:18px;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:12px;backface-visibility:hidden;box-shadow:inset 0 0 14px rgba(216,15,34,.12)}
+.pip{width:15px;height:15px;border-radius:50%;background:var(--red);place-self:center}
+.f1{transform:rotateY(0) translateZ(48px)}.f2{transform:rotateY(90deg) translateZ(48px)}.f3{transform:rotateX(90deg) translateZ(48px)}
+.f4{transform:rotateX(-90deg) translateZ(48px)}.f5{transform:rotateY(-90deg) translateZ(48px)}.f6{transform:rotateY(180deg) translateZ(48px)}
+.shake{animation:sh .5s infinite}
+@keyframes sh{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.rolling{font-weight:800;color:var(--red);font-size:18px}
+.ticket{display:none;margin-top:6px;border:2px dashed var(--red);border-radius:18px;padding:16px;background:linear-gradient(180deg,#fff,#fff3e3);text-align:center;animation:pop .5s}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.big{font-size:64px;font-weight:900;color:var(--red);line-height:1}
+.big small{font-size:28px}
+.off{font-weight:800;letter-spacing:.1em;color:var(--dark);font-size:14px}
+.nm{font-size:22px;font-weight:800;margin:8px 0 2px}
+.meta{font-size:14px;color:#6b4a3f}
+.code{display:inline-block;margin-top:10px;background:var(--ink);color:var(--gold);padding:7px 14px;border-radius:10px;font-weight:800;letter-spacing:.12em}
+.live{font-size:12px;color:#7a5f54;margin-top:10px}
+.show{font-size:13px;font-weight:700;color:var(--dark);margin-top:8px}
+.used{font-size:13px;background:#fff3cd;border-radius:10px;padding:8px;margin-bottom:10px;color:#6b4a00;display:none}
+.conf{position:fixed;top:-10px;width:9px;height:14px;z-index:9;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.foot{text-align:center;font-size:12px;color:#8a6f64;padding-bottom:30px}
+</style></head><body>
+<div class="hero"><div class="brand">CALOYAA CAFE</div><h1>Dice Play 🎲</h1><div class="sub">Roll the dice. Get that % off. Students only.</div></div>
+<div class="wrap"><div class="card">
+<form id="form" autocomplete="on">
+<label>Your name</label><input id="name" name="name" placeholder="e.g. Rohan Sharma" maxlength="60" required>
+<label>Mobile number</label><input id="phone" name="tel" type="tel" inputmode="numeric" placeholder="10-digit number" maxlength="10" required>
+<label>College / Institute</label><input id="college" name="college" placeholder="e.g. Aakash Institute" maxlength="80" required>
+<button class="btn" id="go" type="submit">Roll the dice 🎲</button>
+<div class="err" id="err"></div>
+<div class="rules">1 play per student per day. Roll 1-6 = that % discount.<br>Show the result screen at the Caloyaa counter. Valid on the day you play.</div>
+</form>
+<div class="stage" id="stage">
+<div class="used" id="used">You already played today. Here is your result:</div>
+<div class="scene"><div class="dice" id="dice"></div></div>
+<div class="rolling" id="rolling">Rolling...</div>
+<div class="ticket" id="ticket">
+<div class="off">YOUR DISCOUNT</div><div class="big"><span id="pct">0</span><small>% OFF</small></div>
+<div class="nm" id="rname"></div><div class="meta" id="rdate"></div>
+<div class="code" id="rcode"></div>
+<div class="show">Show this screen at the counter to redeem</div>
+<div class="live" id="live"></div></div>
+</div></div>
+<p class="foot">Caloyaa Cafe, Aakash Institute, Plot 59, Sector 12, Dwarka</p></div>
+<script>
+var API="https://script.google.com/macros/s/AKfycbz4DkGagJE3olJWi57LWP0NlPlSdE4JAhi9M96-X5b33cOEQ9mCnpxPp2X-0pINOYAf/exec";
+var rot={1:[0,0],2:[0,-90],3:[-90,0],4:[90,0],5:[0,90],6:[0,180]};
+var layout={1:[5],2:[1,9],3:[1,5,9],4:[1,3,7,9],5:[1,3,5,7,9],6:[1,3,4,6,7,9]};
+var dice=document.getElementById('dice');
+for(var f=1;f<=6;f++){var d=document.createElement('div');d.className='face f'+f;
+ for(var c=1;c<=9;c++){var s=document.createElement('div');if(layout[f].indexOf(c)>-1){s.className='pip'}d.appendChild(s)}dice.appendChild(d)}
+function $(i){return document.getElementById(i)}
+function confetti(){var cols=['#d80f22','#ffb703','#fff','#2b1a14','#ff6b6b'];
+ for(var i=0;i<60;i++){var e=document.createElement('div');e.className='conf';e.style.left=Math.random()*100+'vw';
+ e.style.background=cols[i%5];e.style.animationDuration=(2+Math.random()*2)+'s';e.style.animationDelay=Math.random()*.6+'s';
+ document.body.appendChild(e);setTimeout(function(x){x.remove()}.bind(null,e),5000)}}
+function tick(){var n=new Date();$('live').textContent='Live: '+n.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' '+n.toLocaleTimeString('en-GB')}
+function roll(res){
+ $('form').style.display='none';$('stage').style.display='block';
+ if(res.already)$('used').style.display='block';
+ dice.style.transition='none';dice.style.transform='rotateX(0) rotateY(0)';dice.classList.add('shake');
+ setTimeout(function(){dice.classList.remove('shake');dice.style.transition='transform 2.2s cubic-bezier(.15,.7,.2,1)';
+  var r=rot[res.number];dice.style.transform='rotateX('+(r[0]-1440)+'deg) rotateY('+(r[1]-1440)+'deg)'},700);
+ setTimeout(function(){$('rolling').style.display='none';$('pct').textContent=res.number;
+  $('rname').textContent=res.name;$('rdate').textContent=res.date+(res.redeemed?'  |  ALREADY REDEEMED':'');
+  $('rcode').textContent=res.code;$('ticket').style.display='block';tick();setInterval(tick,1000);
+  if(!res.already)confetti();
+  try{localStorage.setItem('cdp',JSON.stringify({d:new Date().toDateString(),r:res}))}catch(e){}},3100)}
+$('form').addEventListener('submit',function(ev){ev.preventDefault();
+ var phone=$('phone').value.replace(/\D/g,'');$('err').textContent='';
+ if(!/^[6-9]\d{9}$/.test(phone)){$('err').textContent='Enter a valid 10-digit mobile number.';return}
+ $('go').disabled=true;$('go').textContent='Please wait...';
+ var q='?name='+encodeURIComponent($('name').value)+'&phone='+phone+'&college='+encodeURIComponent($('college').value)+'&t='+Date.now();
+ fetch(API+q).then(function(r){return r.json()}).then(function(res){
+  if(!res.ok){$('err').textContent=res.error||'Something went wrong. Try again.';$('go').disabled=false;$('go').textContent='Roll the dice 🎲';return}
+  roll(res)}).catch(function(){$('err').textContent='No internet or server busy. Please try again.';$('go').disabled=false;$('go').textContent='Roll the dice 🎲'})});
+</script></body></html>
