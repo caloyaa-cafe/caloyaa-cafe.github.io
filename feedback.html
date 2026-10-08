@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customer feedback | Caloyaa</title>
+<meta name="description" content="Tell Caloyaa what you loved and how we can make your next order better.">
+<style>*{box-sizing:border-box}body{margin:0;background:#fff6f2;color:#272020;font:16px/1.5 system-ui,sans-serif}header{background:#b61f34;color:white;padding:20px 24px;font-size:22px;font-weight:800;letter-spacing:1px}main{max-width:620px;margin:32px auto;padding:28px;background:white;border-radius:20px;box-shadow:0 12px 40px #7120200d}h1{font-size:30px;line-height:1.15;margin:0 0 12px}p{color:#6c5c5c}label,legend{font-weight:650;display:block;margin:20px 0 8px}small{font-weight:400;color:#796b6b}input[type=text],input[type=date],textarea{width:100%;padding:13px;border:1px solid #d9cdcd;border-radius:9px;font:inherit;background:#fffcfb}textarea{min-height:88px;resize:vertical}fieldset{border:0;padding:0;margin:0}.ratings{display:flex;gap:10px}.ratings label{margin:0;flex:1;text-align:center;padding:10px 4px;border:1px solid #e9d7d7;border-radius:10px;cursor:pointer}.ratings input{accent-color:#b61f34;display:block;margin:0 auto 7px}.ratings label:has(input:checked){background:#fff0ef;border-color:#b61f34;color:#a4162b}.scale{display:flex;justify-content:space-between;font-size:12px;margin-top:8px}button{margin-top:24px;background:#b61f34;color:white;width:100%;border:0;border-radius:10px;padding:15px;font:700 16px system-ui;cursor:pointer}a{color:#a4162b}article{border-bottom:1px solid #eadfdf;padding:16px 0}article p{white-space:pre-wrap;overflow-wrap:anywhere}input:focus,textarea:focus{outline:2px solid #b61f34;outline-offset:2px}.trap{position:absolute;left:-10000px}footer{font-size:12px;color:#796b6b;margin-top:24px}@media(max-width:680px){main{margin:20px 14px;padding:24px}h1{font-size:28px}}</style>
+</head>
+<body>
+<header>CALOYAA</header>
+<main>
+<small>SECTOR 12, DWARKA</small>
+<h1 style="margin-top:12px">How was your Caloyaa experience?</h1>
+<p>A quick note helps us make your next order better.</p>
+<form id="feedback" method="post" action="https://api.web3forms.com/submit">
+<input type="hidden" name="access_key" value="b41496b2-94b1-466d-9d0b-ddb9eb42a619">
+<input type="hidden" name="subject" value="Caloyaa customer feedback">
+<input type="hidden" name="from_name" value="Caloyaa Feedback">
+<label for="name">Your name <small>(optional)</small>
+</label>
+<input id="name" name="name" type="text" maxlength="80" autocomplete="name" placeholder="Your name">
+<fieldset>
+<legend>Overall rating <small>(required)</small>
+</legend>
+<div class="ratings">
+<label>
+<input type="radio" name="rating" value="1" required>1 &#9733;</label>
+<label>
+<input type="radio" name="rating" value="2" required>2 &#9733;</label>
+<label>
+<input type="radio" name="rating" value="3" required>3 &#9733;</label>
+<label>
+<input type="radio" name="rating" value="4" required>4 &#9733;</label>
+<label>
+<input type="radio" name="rating" value="5" required>5 &#9733;</label>
+</div>
+<div class="scale">
+<span>1 = Poor</span>
+<span>5 = Excellent</span>
+</div>
+</fieldset>
+<label for="liked">What did you like? <small>(optional)</small>
+</label>
+<textarea id="liked" name="liked" maxlength="1000" placeholder="A favourite item, the taste, the service...">
+</textarea>
+<label for="suggestions">What could we do better? <small>(optional)</small>
+</label>
+<textarea id="suggestions" name="suggestions" maxlength="1000" placeholder="We welcome honest suggestions.">
+</textarea>
+<label for="visit_date">Order / visit date <small>(optional)</small>
+</label>
+<input id="visit_date" name="visit_date" type="date">
+<div class="trap" aria-hidden="true">
+<label>Leave blank<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+</label>
+</div>
+<button type="submit">Send feedback</button>
+<footer>Your feedback is sent privately to Caloyaa by email through Web3Forms, which processes and stores submissions. It is not posted as a public review. Please don't include payment details or other sensitive information.</footer>
+<p id="result" role="status" aria-live="polite">
+</p>
+</form>
+</main>
+<script>const form=document.querySelector('#feedback'),result=document.querySelector('#result');form.addEventListener('submit',async e=>{e.preventDefault();const button=form.querySelector('button');button.disabled=true;button.textContent='Sending...';result.textContent='';try{const response=await fetch(form.action,{method:'POST',body:new FormData(form)});const data=await response.json();if(response.ok&&data.success){form.innerHTML='<h2>Thanks for sharing.</h2>
+<p>Your feedback has been sent to Caloyaa. We appreciate you helping us improve.</p>
+<p>
+<a href="/">Back to the menu</a>
+</p>';form.scrollIntoView({behavior:'smooth',block:'start'});}else{result.textContent='Your feedback was not sent. Please try again. '+(data.message||'');button.disabled=false;button.textContent='Send feedback';}}catch(error){result.textContent='Your feedback was not sent. Check your connection and try again.';button.disabled=false;button.textContent='Send feedback';}});</script>
+</body>
+  </html>
