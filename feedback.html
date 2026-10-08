@@ -60,4 +60,48 @@
 <p id="result" role="status" aria-live="polite">
 </p>
 </form>
+<section style="margin-top:36px;border-top:1px solid #eadfdf;padding-top:24px">
+<h2>From our feedback register</h2>
+<p>A selection of handwritten customer feedback from our cafe. Their words, as recorded.</p>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Good white sauce pasta.</p>
+<footer style="margin-top:8px">Khushi</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Good and delicious, mouthwatering food.</p>
+<footer style="margin-top:8px">Dishita</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Thin crust of momos &amp; delicious in taste, must try!</p>
+<footer style="margin-top:8px">Aditya</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">We tried veg momos, they were really good and tasty.</p>
+<footer style="margin-top:8px">Upasana</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Taste was soo good but quantity is too less.</p>
+<footer style="margin-top:8px">Kirtika</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Good sandwich - very fastly received.</p>
+<footer style="margin-top:8px">Jivika</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Explicitly delicious with subtle enjoyable flavours, please add more ice cream options.</p>
+<footer style="margin-top:8px">Sanchi</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Paneer momos are filled, soft and yum :)</p>
+<footer style="margin-top:8px">Simone</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">Very tasty burger!!! :)</p>
+<footer style="margin-top:8px">Ritika</footer>
+</blockquote>
+<blockquote style="margin:18px 0;padding:16px;background:#fff6f2;border-radius:10px">
+<p style="margin:0;color:#272020">V v v good, love the cold coffee.</p>
+<footer style="margin-top:8px">Sunana</footer>
+</blockquote>
+</section>
 </main><script>const form=document.querySelector('#feedback'),result=document.querySelector('#result');form.addEventListener('submit',async e=>{e.preventDefault();const button=form.querySelector('button');button.disabled=true;button.textContent='Sending...';result.textContent='';try{const response=await fetch(form.action,{method:'POST',body:new FormData(form)});const data=await response.json();if(response.ok&&data.success){form.innerHTML='<h2>Thanks for sharing.</h2><p>Your feedback has been sent to Caloyaa. We appreciate you helping us improve.</p><p><a href="/">Back to the menu</a></p>';form.scrollIntoView({behavior:'smooth',block:'start'});}else{result.textContent='Your feedback was not sent. Please try again. '+(data.message||'');button.disabled=false;button.textContent='Send feedback';}}catch(error){result.textContent='Your feedback was not sent. Check your connection and try again.';button.disabled=false;button.textContent='Send feedback';}});</script></body></html>
