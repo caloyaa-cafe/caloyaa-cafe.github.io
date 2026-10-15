@@ -74,7 +74,7 @@ jobs:
   update-stock:
     outputs:
       commit_sha: ${{ steps.commit.outputs.commit_sha }}
-    if: github.actor == 'Nikhl098' && github.ref == 'refs/heads/main'
+    if: (github.actor == 'Nikhl098' || github.actor == 'nikhilpratap-singh') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -117,7 +117,7 @@ jobs:
           fi
           echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   deploy:
-    if: github.actor == 'Nikhl098' && github.ref == 'refs/heads/main'
+    if: (github.actor == 'Nikhl098' || github.actor == 'nikhilpratap-singh') && github.ref == 'refs/heads/main'
     needs: update-stock
     runs-on: ubuntu-latest
     environment:
